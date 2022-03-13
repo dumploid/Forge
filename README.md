@@ -29,7 +29,7 @@ Statement(<token...>) {
 
 For example, if statements will be formatted as:
 ```
-Token("ifToken", keyWordToken("if"))
+Token(ifToken, keyWordToken("if"))
 
 Statement(ifToken, booleanBlock, codeScope) {
   
