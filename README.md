@@ -29,6 +29,8 @@ Statement(<token...>) {
 
 For example, if statements will be formatted as:
 ```
+Token("ifToken", keyWordToken("if"))
+
 Statement(ifToken, booleanBlock, codeScope) {
   
   if(parse(blockScope).getValue()) {
