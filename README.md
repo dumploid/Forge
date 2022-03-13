@@ -15,13 +15,15 @@ The latter 3 points are what set apart this language.
 
 The current theoretical syntax for declaring the above features being:
 
+#Code Examples
 To declare a token: 
 ```
-  Token(tokenName, regex)
+Token(tokenName, regex)
 ```
 
+To declare a statement: 
 ```
-To declare a statement: Statement(token...) {
+Statement(token...) {
   //code on run
 }
 ```
