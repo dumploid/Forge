@@ -12,10 +12,9 @@ The base language contains minimal features, those being:
 
 The latter 3 points are what set apart this language.
 
-
-The current theoretical syntax for declaring the above features being:
-
 # Code Examples
+The below examples are theoretical, and have not been introduced into the language.
+
 To declare a token: 
 ```
 Token(tokenName, regex)
