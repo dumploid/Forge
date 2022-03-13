@@ -15,7 +15,7 @@ The latter 3 points are what set apart this language.
 
 The current theoretical syntax for declaring the above features being:
 
-#Code Examples
+# Code Examples
 To declare a token: 
 ```
 Token(tokenName, regex)
