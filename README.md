@@ -17,12 +17,12 @@ The below examples are theoretical, and have not been introduced into the langua
 
 To declare a token: 
 ```
-Token(tokenName, regex)
+Token(<tokenName>, <regex>)
 ```
 
 To declare a statement: 
 ```
-Statement(token...) {
+Statement(<token...>) {
   //code on run
 }
 ```
