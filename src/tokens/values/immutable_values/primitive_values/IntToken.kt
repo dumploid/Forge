@@ -1,4 +1,4 @@
-package tokens.values.primitive_values
+package tokens.values.immutable_values.primitive_values
 
 import tokens.values.AbstractValueToken
 
