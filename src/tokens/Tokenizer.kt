@@ -23,7 +23,6 @@ final class Tokenizer {
         if(capturedTokenValues.isEmpty()) return listOf()
 
         val matchedToken = getContainingGroup().getMatchedToken(program)
-
         val splitProgram = program.split(matchedToken.matchedPattern)
 
         //interweave the split programs tokens and the capturedTokenValues

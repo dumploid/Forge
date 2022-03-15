@@ -4,7 +4,7 @@ import tokens.Token
 import tokens.keywords.IntKeyword
 import tokens.non_specific.ValidName
 import tokens.operators.AssignmentOperator
-import tokens.values.primitive_values.IntToken
+import tokens.values.immutable_values.primitive_values.IntToken
 import statements.StatementMatcher
 import statements.StatementToken
 
