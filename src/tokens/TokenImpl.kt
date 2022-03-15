@@ -10,7 +10,7 @@ object TokenImpl {
         PrecedenceGroup(IntToken),
         PrecedenceGroup(*KeywordImpl.keywordList),
         PrecedenceGroup(ValidName),
-        PrecedenceGroup(OpeningBracketOperator, ClosingBracketOperator),
+        PrecedenceGroup(OpeningBraceOperator, ClosingBraceOperator, OpeningBracketOperator, ClosingBracketOperator),
         PrecedenceGroup(AssignmentOperator)
     )
 }
