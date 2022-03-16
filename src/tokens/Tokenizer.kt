@@ -1,6 +1,8 @@
 package tokens
 
-final class Tokenizer {
+import tokens.non_specific.IgnoredToken
+
+class Tokenizer {
     private lateinit var program: String
 
     private fun hasTokens(): Boolean = TokenImpl.tokenList.any{
@@ -12,6 +14,8 @@ final class Tokenizer {
                                                         }!!
 
     private fun getTokenValues(): List<TokenValue> = getContainingGroup().getTokenValues(program)
+
+    fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter{it.type != IgnoredToken}
 
     fun tokenize(program: String): List<TokenValue> {
         this.program = program
@@ -33,6 +37,6 @@ final class Tokenizer {
 
         output.addAll(tokenize(splitProgram.last()))
 
-        return output
+        return cleanTokens(output)
     }
 }
