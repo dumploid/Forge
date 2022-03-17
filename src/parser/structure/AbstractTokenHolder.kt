@@ -1,3 +1,3 @@
-package tokens.structure
+package parser.structure
 
 abstract class AbstractTokenHolder

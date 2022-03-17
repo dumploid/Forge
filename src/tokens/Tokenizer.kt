@@ -15,7 +15,7 @@ class Tokenizer {
 
     private fun getTokenValues(): List<TokenValue> = getContainingGroup().getTokenValues(program)
 
-    fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter{it.type != IgnoredToken}
+    private fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter{it.type != IgnoredToken}
 
     fun tokenize(program: String): List<TokenValue> {
         this.program = program
