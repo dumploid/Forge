@@ -31,6 +31,7 @@ object TokenImpl {
         PrecedenceGroup(BitwiseAnd, BitwiseOr, BitwiseXor),
 
         PrecedenceGroup(GreaterThan, LessThan),
-        PrecedenceGroup(AssignmentOperator)
+        PrecedenceGroup(AssignmentOperator),
+        PrecedenceGroup(StatementEndToken)
     )
 }
