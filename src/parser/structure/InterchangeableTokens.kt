@@ -1,7 +1,10 @@
 package parser.structure
 
-class InterchangeableTokens(vararg passedTokens: AbstractTokenHolder) : TokenStructure(*passedTokens) {
-    override fun tokenHolderEquals(checkedValue: AbstractTokenHolder): Boolean = heldTokens.any {
-        if (it is TokenStructure) it.tokenHolderEquals(checkedValue) else checkedValue == it
+class InterchangeableTokens(vararg heldTokens: AbstractTokenHolder<*>) : TokenStructure(*heldTokens) {
+    override fun matches(checkedValue: AbstractTokenHolder<*>): Boolean = heldTokens.any {
+        return when (it) {
+            is TokenStructure -> it.matches(checkedValue)
+            else -> checkedValue == it
+        }
     }
 }

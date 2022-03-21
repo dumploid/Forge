@@ -1,5 +1,3 @@
 package value.immutables
 
-class CharacterType(override val heldValue: Char) : ImmutableType<Char>() {
-
-}
+class CharacterType(override val heldValue: Char) : ImmutableType<Char>()
