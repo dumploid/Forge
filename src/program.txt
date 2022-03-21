@@ -1,0 +1,4 @@
+Int x = 10;
+Byte value = 0b100;
+
+String value = "Hello!";

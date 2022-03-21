@@ -15,8 +15,8 @@ import tokens.patterns.values.immutable_values.*
 object TokenImpl {
     val tokenList: List<PrecedenceGroup> = listOf(
         PrecedenceGroup(StringTokenPattern),
+        PrecedenceGroup(DoubleTokenPattern, IntTokenPattern),
         PrecedenceGroup(IgnoredTokenPattern),
-        PrecedenceGroup(IntTokenPattern),
 
         PrecedenceGroup(*keywordList),
         PrecedenceGroup(ValidName),

@@ -1,0 +1,6 @@
+package parser.statements.statement_patterns.declaration
+
+import tokens.patterns.keywords.StringKeyword
+import tokens.patterns.values.immutable_values.StringTokenPattern
+
+object StringTypeDeclarationPattern : DeclarationPattern(StringKeyword, StringTokenPattern)
