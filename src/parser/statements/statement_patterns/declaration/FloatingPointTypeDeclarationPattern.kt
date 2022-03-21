@@ -1,0 +1,7 @@
+package parser.statements.statement_patterns.declaration
+
+import parser.structure.InterchangeableTokens
+import tokens.patterns.keywords.*
+import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
+
+object FloatingPointTypeDeclarationPattern: DeclarationPattern(InterchangeableTokens(FloatKeyword, DoubleKeyword), DoubleTokenPattern)

@@ -1,7 +1,16 @@
+
 import parser.Parser
 import tokens.Tokenizer
+import java.io.File
+import java.io.BufferedReader
 
 fun main() {
-    //checks all tokens are matched:
-    Tokenizer().tokenize("\"String con7ents\" 0b140 Int Long Short Byte name == >= <= || && [](){} << >> + - * / % & | ^ < > =")
+    val bufferedReader: BufferedReader = File("src/program.txt").bufferedReader()
+    val inputProgram = bufferedReader.use { it.readText() }
+
+    println("input program:")
+    println(inputProgram)
+
+    val tokens = Tokenizer().tokenize(inputProgram)
+    println(Parser.parseTokenList(tokens).heldStatements)
 }
