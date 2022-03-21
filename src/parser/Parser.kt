@@ -3,38 +3,29 @@ package parser
 import parser.nodes.StatementContainer
 import parser.statements.statement_patterns.StatementPattern
 import parser.statements.statement_patterns.StatementPatternImpl.statementPatternList
-import parser.structure.TokenGrouping
 import tokens.TokenValue
-import tokens.non_specific.StatementEndToken
+import tokens.patterns.non_specific.StatementEndTokenPattern
 
 typealias TokenValueList = List<TokenValue>
 
 object Parser {
-    fun parseTokenList(inputTokens: TokenValueList): StatementContainer = StatementContainer(parseStatements(inputTokens))
+    fun parseTokenList(inputTokens: TokenValueList): StatementContainer = TODO()
+        //StatementContainer(parseStatements(inputTokens))
 
-    fun parseStatements(inputTokens: TokenValueList): List<StatementPattern> {
-        val patternList: List<StatementPattern> = getUnparsedStatements(inputTokens).map {
-            x ->
-
-            val possibleStatement: StatementPattern = statementPatternList.find {
-                it.matchesStatement(TokenGrouping(*x.map{ y -> y.type }.toTypedArray()))
-            } ?: throw RuntimeException("Unable to match statement: $x to pattern")
-
-            //throw statement needs to be redone once errors are implemented
-
-            possibleStatement
+    fun parseStatements(inputTokens: TokenValueList): List<StatementPattern> =
+        getUnparsedStatements(inputTokens).map { x ->
+            statementPatternList.find { y ->
+                y.matches(x)
+            }!!
         }
 
-        return patternList
-    }
-
-    fun getUnparsedStatements(inputTokens: TokenValueList): List<TokenValueList> {
+    private fun getUnparsedStatements(inputTokens: TokenValueList): List<TokenValueList> {
         val output: MutableList<TokenValueList> = ArrayList()
 
         var currentTokenValueList: MutableList<TokenValue> = ArrayList()
 
-        for(currentToken: TokenValue in inputTokens) {
-            if(currentToken.type == StatementEndToken) {
+        for (currentToken: TokenValue in inputTokens) {
+            if (currentToken.type == StatementEndTokenPattern) {
                 output.add(currentTokenValueList)
                 currentTokenValueList = ArrayList()
                 continue

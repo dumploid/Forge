@@ -1,34 +1,29 @@
 package parser.structure
 
-import tokens.Token
+import tokens.patterns.TokenPattern
 
-class TokenGrouping(vararg heldTokens: AbstractTokenHolder) : TokenStructure(*heldTokens) {
+class TokenGrouping(vararg heldTokens: AbstractTokenHolder<*>) : TokenStructure(*heldTokens) {
 
-    init {
-        println("declared!")
-        println(heldTokens)
-    }
+    override fun matches(checkedValue: AbstractTokenHolder<*>): Boolean {
+        if (checkedValue is TokenGrouping) {
 
-    fun tokenHolderEquals(checkedValue: TokenGrouping): Boolean {
-        if(heldTokens.size != checkedValue.heldTokens.size) return false
+            if (heldTokens.size != checkedValue.heldTokens.size) return false
 
-        for(i in heldTokens.indices) {
-            when {
-                (heldTokens[i] is Token) -> if(heldTokens[i] != checkedValue.heldTokens[i]) return false
-                (heldTokens[i] is TokenStructure) -> if (! (heldTokens[i] as TokenStructure).tokenHolderEquals(checkedValue.heldTokens[i])) return false
-                //doesn't match InterchangeableTokens for some reason??? ^
-                (heldTokens[i] is InterchangeableTokens) -> if (! (heldTokens[i] as TokenStructure).tokenHolderEquals(checkedValue.heldTokens[i])) return true
-                else -> throw RuntimeException("Unable to check for type " + heldTokens[i].javaClass.kotlin.qualifiedName)
+            for (i in heldTokens.indices) {
+                when {
+                    (heldTokens[i] is TokenPattern) -> if (heldTokens[i] != checkedValue.heldTokens[i]) return false
+                    (heldTokens[i] is TokenStructure) -> if (!(heldTokens[i] as TokenStructure).matches(
+                            checkedValue.heldTokens[i]
+                        )
+                    ) return false
+
+                    else -> throw RuntimeException("Unable to check for type " + heldTokens[i].javaClass.kotlin.qualifiedName)
+                }
             }
+
+            return true
+
         }
-
-        println("returned true")
-
-        return true
-    }
-
-    override fun tokenHolderEquals(checkedValue: AbstractTokenHolder): Boolean {
-        if(checkedValue is TokenGrouping) return tokenHolderEquals(checkedValue)
         return false
     }
 }

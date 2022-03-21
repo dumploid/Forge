@@ -1,3 +1,5 @@
 package parser.structure
 
-abstract class AbstractTokenHolder
+import utils.patterns.Pattern
+
+abstract class AbstractTokenHolder<T>: Pattern<T>

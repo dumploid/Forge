@@ -1,3 +1,6 @@
 package tokens
 
-data class TokenValue(val type: Token, val value: String)
+import tokens.patterns.TokenPattern
+import utils.patterns.ValueContainer
+
+data class TokenValue(val type: TokenPattern, val value: String): ValueContainer<TokenPattern, String>(type, value)
