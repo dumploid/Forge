@@ -1,6 +1,8 @@
 package parser.statements.statement_patterns.declaration
 
-import tokens.patterns.keywords.StringKeyword
-import tokens.patterns.values.immutable_values.StringTokenPattern
+import parser.nodes.evaluated.EvaluatedNodeType
+import parser.nodes.evaluated.EvaluatedNodeTypeWrapper
+import tokens.patterns.Keyword
 
-object StringTypeDeclarationPattern : DeclarationPattern(StringKeyword, StringTokenPattern)
+object StringTypeDeclarationPattern :
+    DeclarationPattern(Keyword.STRING_KEYWORD, EvaluatedNodeTypeWrapper(EvaluatedNodeType.StringType))

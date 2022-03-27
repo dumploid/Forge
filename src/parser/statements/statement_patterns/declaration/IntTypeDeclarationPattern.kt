@@ -1,7 +1,11 @@
 package parser.statements.statement_patterns.declaration
 
-import tokens.patterns.keywords.*
-import parser.structure.*
-import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
+import parser.nodes.evaluated.EvaluatedNodeType
+import parser.nodes.evaluated.EvaluatedNodeTypeWrapper
+import parser.structure.InterchangeableTokens
+import tokens.patterns.Keyword
 
-object IntTypeDeclarationPattern : DeclarationPattern(InterchangeableTokens(IntKeyword, LongKeyword, ShortKeyword, ByteKeyword), IntTokenPattern)
+object IntTypeDeclarationPattern : DeclarationPattern(
+    InterchangeableTokens(Keyword.INT_KEYWORD, Keyword.LONG_KEYWORD, Keyword.SHORT_KEYWORD, Keyword.BYTE_KEYWORD),
+    EvaluatedNodeTypeWrapper(EvaluatedNodeType.IntegerType)
+)

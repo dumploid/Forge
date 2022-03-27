@@ -2,40 +2,37 @@ package tokens
 
 import tokens.patterns.non_specific.IgnoredTokenPattern
 
-class Tokenizer {
-    private lateinit var program: String
-
-    private fun hasTokens(): Boolean = TokenImpl.tokenList.any {
-        it.containsMatchingToken(program)
+class Tokenizer(val program: String) {
+    private fun hasTokens(): Boolean = tokenList.any {
+        it.containsMatchingValue(program)
     }
 
-    private fun getContainingGroup(): PrecedenceGroup = TokenImpl.tokenList.find {
-        it.containsMatchingToken(program)
+    private fun getContainingGroup(): TokenPrecedenceGroup = tokenList.find {
+        it.containsMatchingValue(program)
     }!!
 
     private fun getTokenValues(): List<TokenValue> = getContainingGroup().getTokenValues(program)
 
     private fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter { it.type != IgnoredTokenPattern }
 
-    fun tokenize(program: String): List<TokenValue> {
-        this.program = program
+    fun tokenize(): List<TokenValue> {
         if (!hasTokens()) return listOf()
-
-        val output: MutableList<TokenValue> = ArrayList()
 
         val capturedTokenValues = getTokenValues()
         if (capturedTokenValues.isEmpty()) return listOf()
 
-        val matchedToken = getContainingGroup().getMatchedToken(program)
+        val output: MutableList<TokenValue> = ArrayList()
+
+        val matchedToken = getContainingGroup().getMatchingValue(program)
         val splitProgram = program.split(matchedToken.matchedPattern)
 
         //interweave the split programs tokens and the capturedTokenValues
         for (i in capturedTokenValues.indices) {
-            output.addAll(tokenize(splitProgram[i]))
+            output.addAll(Tokenizer(splitProgram[i]).tokenize())
             output.add(capturedTokenValues[i])
         }
 
-        output.addAll(tokenize(splitProgram.last()))
+        output.addAll(Tokenizer(splitProgram.last()).tokenize())
 
         return cleanTokens(output)
     }

@@ -1,37 +1,48 @@
 package tokens
 
-import tokens.patterns.keywords.KeywordImpl.keywordList
-import tokens.patterns.non_specific.*
+import tokens.patterns.Keyword
+import tokens.patterns.non_specific.IgnoredTokenPattern
+import tokens.patterns.non_specific.StatementEndTokenPattern
+import tokens.patterns.non_specific.ValidName
+import tokens.patterns.operators.UnfixedOperatorPattern
+import tokens.patterns.operators.binary_operators.BitwiseOperators
+import tokens.patterns.operators.binary_operators.ComparisonOperatorPattern
+import tokens.patterns.operators.binary_operators.LogicalOperatorPattern
+import tokens.patterns.operators.binary_operators.MathOperatorPattern
+import tokens.patterns.values.immutable_values.StringTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.BooleanTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.CharacterTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
 
-import tokens.patterns.operators.*
-import tokens.patterns.operators.binary_operators.comparison_operators.*
-import tokens.patterns.operators.binary_operators.logical_operators.*
-import tokens.patterns.operators.binary_operators.math_operators.*
-import tokens.patterns.operators.binary_operators.math_operators.bitwise_operators.*
+val tokenList: List<TokenPrecedenceGroup> = listOf(
+    TokenPrecedenceGroup(StringTokenPattern, CharacterTokenPattern),
+    TokenPrecedenceGroup(DoubleTokenPattern, IntTokenPattern),
+    TokenPrecedenceGroup(BooleanTokenPattern),
+    TokenPrecedenceGroup(IgnoredTokenPattern),
 
-import tokens.patterns.values.immutable_values.primitive_values.*
-import tokens.patterns.values.immutable_values.*
+    TokenPrecedenceGroup(*Keyword.values()),
+    TokenPrecedenceGroup(ValidName),
 
-object TokenImpl {
-    val tokenList: List<PrecedenceGroup> = listOf(
-        PrecedenceGroup(StringTokenPattern),
-        PrecedenceGroup(DoubleTokenPattern, IntTokenPattern),
-        PrecedenceGroup(IgnoredTokenPattern),
+    TokenPrecedenceGroup(
+        ComparisonOperatorPattern.EQUALS,
+        ComparisonOperatorPattern.GREATER_THAN_OR_EQUAL,
+        ComparisonOperatorPattern.LESS_THAN_OR_EQUAL
+    ),
+    TokenPrecedenceGroup(LogicalOperatorPattern.LOGICAL_OR, LogicalOperatorPattern.LOGICAL_AND),
 
-        PrecedenceGroup(*keywordList),
-        PrecedenceGroup(ValidName),
+    TokenPrecedenceGroup(
+        UnfixedOperatorPattern.OPENING_BRACE,
+        UnfixedOperatorPattern.CLOSING_BRACE,
+        UnfixedOperatorPattern.OPENING_BRACKET,
+        UnfixedOperatorPattern.CLOSING_BRACKET
+    ),
 
-        PrecedenceGroup(EqualsOperator, GreaterThanOrEqualOperator, LessThanOrEqualOperator),
-        PrecedenceGroup(LogicalOr, LogicalAnd),
+    TokenPrecedenceGroup(BitwiseOperators.BITWISE_SHIFT_LEFT, BitwiseOperators.BITWISE_SHIFT_RIGHT),
+    TokenPrecedenceGroup(*MathOperatorPattern.values()),
+    TokenPrecedenceGroup(BitwiseOperators.BITWISE_AND, BitwiseOperators.BITWISE_OR, BitwiseOperators.BITWISE_XOR),
 
-        PrecedenceGroup(OpeningBraceOperator, ClosingBraceOperator, OpeningBracketOperator, ClosingBracketOperator),
-
-        PrecedenceGroup(BitShiftLeftOperator, BitShiftRightOperator),
-        PrecedenceGroup(PlusOperator, MinusOperator, MultiplyOperator, DivideOperator, ModulusOperator),
-        PrecedenceGroup(BitwiseAnd, BitwiseOr, BitwiseXor),
-
-        PrecedenceGroup(GreaterThan, LessThan),
-        PrecedenceGroup(AssignmentOperator),
-        PrecedenceGroup(StatementEndTokenPattern)
-    )
-}
+    TokenPrecedenceGroup(ComparisonOperatorPattern.GREATER_THAN, ComparisonOperatorPattern.LESS_THAN),
+    TokenPrecedenceGroup(UnfixedOperatorPattern.ASSIGNMENT_OPERATOR),
+    TokenPrecedenceGroup(StatementEndTokenPattern)
+)

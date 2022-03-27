@@ -1,9 +1,9 @@
 package tokens.patterns
 
-import parser.structure.AbstractTokenHolder
+import parser.structure.AbstractTokenHolderPattern
 
-abstract class TokenPattern : AbstractTokenHolder<String>() {
-    abstract val matchedPattern: Regex
+interface TokenPattern : AbstractTokenHolderPattern<String> {
+    val matchedPattern: Regex
 
     override fun matches(checkedValue: String): Boolean = matchedPattern.matches(checkedValue)
 }

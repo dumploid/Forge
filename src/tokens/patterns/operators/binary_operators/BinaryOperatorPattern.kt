@@ -1,0 +1,5 @@
+package tokens.patterns.operators.binary_operators
+
+import tokens.patterns.operators.OperatorTokenPattern
+
+interface BinaryOperatorPattern : OperatorTokenPattern

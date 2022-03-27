@@ -1,15 +1,20 @@
 package parser.statements.statement_patterns.declaration
 
 import parser.statements.statement_patterns.StatementPattern
+import parser.structure.AbstractTokenHolderPattern
+import parser.structure.TokenGroupingPattern
+import parser.structure.TokenStructurePattern
 import tokens.patterns.non_specific.ValidName
-import tokens.patterns.operators.AssignmentOperator
-import parser.structure.*
+import tokens.patterns.operators.UnfixedOperatorPattern
 
-abstract class DeclarationPattern(typeName : AbstractTokenHolder<*>, assignedValue : AbstractTokenHolder<*>) : StatementPattern() {
-    override val tokenPattern: TokenStructure = TokenGrouping(
+abstract class DeclarationPattern(
+    typeName: AbstractTokenHolderPattern<*>,
+    assignedValue: AbstractTokenHolderPattern<*>
+) : StatementPattern() {
+    override val tokenPattern: TokenStructurePattern = TokenGroupingPattern(
         typeName,
         ValidName,
-        AssignmentOperator,
+        UnfixedOperatorPattern.ASSIGNMENT_OPERATOR,
         assignedValue
     )
 }
