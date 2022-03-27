@@ -5,5 +5,6 @@ import parser.statements.statement_patterns.declaration.IntTypeDeclarationPatter
 import parser.statements.statement_patterns.declaration.StringTypeDeclarationPattern
 
 object StatementPatternImpl {
-    val statementPatternList = arrayOf(IntTypeDeclarationPattern, StringTypeDeclarationPattern, FloatingPointTypeDeclarationPattern)
+    val statementPatternList =
+        arrayOf(IntTypeDeclarationPattern, StringTypeDeclarationPattern, FloatingPointTypeDeclarationPattern)
 }
