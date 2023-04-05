@@ -11,5 +11,10 @@ fun main() {
     println(inputProgram)
 
     val tokens = Tokenizer(inputProgram).tokenize()
-    println(Parser.parseTokenList(tokens).heldStatements)
+    val statements = Parser.parseTokenList(tokens).heldStatements
+
+    for (statement in statements) {
+        println(statement)
+        statement.run()
+    }
 }

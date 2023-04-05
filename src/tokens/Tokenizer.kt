@@ -2,7 +2,7 @@ package tokens
 
 import tokens.patterns.non_specific.IgnoredTokenPattern
 
-class Tokenizer(val program: String) {
+class Tokenizer(private val program: String) {
     private fun hasTokens(): Boolean = tokenList.any {
         it.containsMatchingValue(program)
     }

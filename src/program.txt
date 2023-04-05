@@ -4,4 +4,3 @@ Short y = 0xF;
 Long z = 0o123456;
 
 String str = "Hello!";
-String str2 = "Hello, " + "World!";
