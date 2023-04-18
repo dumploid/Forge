@@ -4,4 +4,5 @@ import tokens.patterns.values.AbstractValueTokenPattern
 
 object CharacterTokenPattern : AbstractValueTokenPattern<Char>() {
     override val matchedPattern = Regex("'(([^\\\\'])|(\\\\[ntrv\\\\'\"?]))'")
+    override fun evaluate(from: String): Char = from[0]
 }

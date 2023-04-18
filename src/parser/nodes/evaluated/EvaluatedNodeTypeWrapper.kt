@@ -1,9 +1,9 @@
 package parser.nodes.evaluated
 
 import parser.nodes.AbstractSyntaxTreeNodePattern
-import parser.structure.AbstractTokenHolderPattern
+import utils.patterns.Pattern
 
 class EvaluatedNodeTypeWrapper(val type: EvaluatedNodeType) :
-    AbstractSyntaxTreeNodePattern<AbstractTokenHolderPattern<*>> {
-    override fun matches(checkedValue: AbstractTokenHolderPattern<*>): Boolean = type.typeMatches(checkedValue)
+    AbstractSyntaxTreeNodePattern<Pattern<*>> {
+    override fun matches(checkedValue: Pattern<*>): Boolean = type.typeMatches(checkedValue)
 }

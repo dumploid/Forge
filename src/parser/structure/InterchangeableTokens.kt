@@ -1,8 +1,10 @@
 package parser.structure
 
-class InterchangeableTokens(vararg heldTokenPatterns: AbstractTokenHolderPattern<*>) :
+import utils.patterns.Pattern
+
+class InterchangeableTokens(vararg heldTokenPatterns: Pattern<*>) :
     TokenStructurePattern(*heldTokenPatterns) {
-    override fun matches(checkedValue: AbstractTokenHolderPattern<*>): Boolean = heldTokenPatterns.any {
+    override fun matches(checkedValue: Pattern<*>): Boolean = heldTokenPatterns.any {
         when (it) {
             is TokenStructurePattern -> it.matches(checkedValue)
 

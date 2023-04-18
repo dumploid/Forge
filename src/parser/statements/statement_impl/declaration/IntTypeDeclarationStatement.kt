@@ -1,20 +1,22 @@
 package parser.statements.statement_impl.declaration
 
 import environment.VariableSpace
-import environment.type.IntInstance
+import environment.type.VariableInstance
 import parser.statements.Statement
 import parser.statements.statement_patterns.declaration.IntTypeDeclarationPattern
 import tokens.TokenValue
+import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
 
-class IntTypeDeclarationStatement(heldValue: List<TokenValue>) : Statement(IntTypeDeclarationPattern, heldValue) {
-    val heldValues: List<TokenValue> = heldValue
+class IntTypeDeclarationStatement(tokens: List<TokenValue>) : Statement(IntTypeDeclarationPattern, tokens) {
+    private val name = tokens[1].value;
+    private val evaluatedNode = tokens[3];
 
     override fun run() {
-        for (x in heldValues) {
-            println(x)
+        val x = when (evaluatedNode.type) {
+            is IntTokenPattern -> (evaluatedNode.type).evaluate(evaluatedNode.value)
+            else -> throw RuntimeException("Unable to evaluate node: $evaluatedNode")
         }
 
-        println("Test!")
-        VariableSpace.currentBlock().insertValue(IntInstance())
+        VariableSpace.currentBlock().insertValue(VariableInstance(x), name)
     }
 }

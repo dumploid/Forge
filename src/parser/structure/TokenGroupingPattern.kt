@@ -2,13 +2,14 @@ package parser.structure
 
 import parser.nodes.evaluated.EvaluatedNodeTypeWrapper
 import tokens.patterns.TokenPattern
+import utils.patterns.Pattern
 
-class TokenGroupingPattern(vararg heldTokenPatterns: AbstractTokenHolderPattern<*>) :
+class TokenGroupingPattern(vararg heldTokenPatterns: Pattern<*>) :
     TokenStructurePattern(*heldTokenPatterns) {
 
-    constructor(tokenList: List<AbstractTokenHolderPattern<*>>) : this(*tokenList.toTypedArray())
+    constructor(tokenList: List<Pattern<*>>) : this(*tokenList.toTypedArray())
 
-    override fun matches(checkedValue: AbstractTokenHolderPattern<*>): Boolean {
+    override fun matches(checkedValue: Pattern<*>): Boolean {
         if (checkedValue !is TokenGroupingPattern) return false
 
         if (heldTokenPatterns.size != checkedValue.heldTokenPatterns.size) return false

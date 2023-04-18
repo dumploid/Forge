@@ -1,9 +1,9 @@
 package parser.nodes.evaluated
 
 import parser.nodes.AbstractSyntaxTreeNodePattern
-import parser.structure.AbstractTokenHolderPattern
+import utils.patterns.Pattern
 
-interface EvaluatedNodePattern : AbstractSyntaxTreeNodePattern<AbstractTokenHolderPattern<*>> {
+interface EvaluatedNodePattern : AbstractSyntaxTreeNodePattern<Pattern<*>> {
     fun getNodeType(): EvaluatedNodeType
 
     fun getPatternLength(): Int

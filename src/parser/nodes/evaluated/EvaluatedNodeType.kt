@@ -1,11 +1,11 @@
 package parser.nodes.evaluated
 
-import parser.structure.AbstractTokenHolderPattern
 import tokens.patterns.values.immutable_values.StringTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.BooleanTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.CharacterTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
+import utils.patterns.Pattern
 
 enum class EvaluatedNodeType {
     IntegerType,
@@ -16,7 +16,7 @@ enum class EvaluatedNodeType {
     CharacterType,
     BooleanType;
 
-    fun typeMatches(comparedValue: AbstractTokenHolderPattern<*>): Boolean {
+    fun typeMatches(comparedValue: Pattern<*>): Boolean {
         if (comparedValue is EvaluatedNodePattern) return this == comparedValue.getNodeType()
         if (comparedValue is EvaluatedNodeTypeWrapper) return this == comparedValue.type
 

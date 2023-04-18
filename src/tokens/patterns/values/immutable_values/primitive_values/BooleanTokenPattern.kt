@@ -4,4 +4,5 @@ import tokens.patterns.values.AbstractValueTokenPattern
 
 object BooleanTokenPattern : AbstractValueTokenPattern<Boolean>() {
     override val matchedPattern = Regex("true|false")
+    override fun evaluate(from: String): Boolean = from == "true"
 }

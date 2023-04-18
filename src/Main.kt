@@ -1,3 +1,4 @@
+import environment.VariableSpace
 import parser.Parser
 import tokens.Tokenizer
 import java.io.BufferedReader
@@ -17,4 +18,6 @@ fun main() {
         println(statement)
         statement.run()
     }
+
+    println(VariableSpace.currentBlock().heldValues)
 }

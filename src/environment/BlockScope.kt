@@ -1,12 +1,11 @@
 package environment
 
 import environment.type.VariableInstance
-import kotlin.collections.ArrayList
 
 class BlockScope {
-    private val heldValues: ArrayList<VariableInstance> = ArrayList()
+    val heldValues: HashMap<String, VariableInstance<*>> = HashMap()
 
-    fun insertValue(instance: VariableInstance) {
-        heldValues.add(instance)
+    fun insertValue(instance: VariableInstance<*>, instanceName: String) {
+        heldValues[instanceName] = instance
     }
 }

@@ -4,4 +4,5 @@ import tokens.patterns.values.AbstractValueTokenPattern
 
 object DoubleTokenPattern : AbstractValueTokenPattern<Double>() {
     override val matchedPattern = Regex("[+-]?[0-9]?\\.[0-9]+")
+    override fun evaluate(from: String): Double = from.toDouble()
 }

@@ -1,16 +1,16 @@
 package parser.nodes.evaluated.operators.binary_operators
 
 import parser.nodes.evaluated.operators.OperatorNodePattern
-import parser.structure.AbstractTokenHolderPattern
 import parser.structure.TokenGroupingPattern
 import tokens.patterns.operators.OperatorTokenPattern
+import utils.patterns.Pattern
 
 abstract class BinaryOperatorPattern(
-    val left: AbstractTokenHolderPattern<*>,
+    val left: Pattern<*>,
     operatorToken: OperatorTokenPattern,
-    val right: AbstractTokenHolderPattern<*>
+    val right: Pattern<*>
 ) : OperatorNodePattern(operatorToken) {
-    override fun matches(checkedValue: AbstractTokenHolderPattern<*>): Boolean {
+    override fun matches(checkedValue: Pattern<*>): Boolean {
         return TokenGroupingPattern(left, operatorToken, right).matches(checkedValue)
     }
 

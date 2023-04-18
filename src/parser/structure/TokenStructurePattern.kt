@@ -1,4 +1,6 @@
 package parser.structure
 
-abstract class TokenStructurePattern(vararg val heldTokenPatterns: AbstractTokenHolderPattern<*>) :
-    AbstractTokenHolderPattern<AbstractTokenHolderPattern<*>>
+import utils.patterns.Pattern
+
+abstract class TokenStructurePattern(vararg val heldTokenPatterns: Pattern<*>) :
+    Pattern<Pattern<*>>

@@ -1,5 +1,3 @@
 package environment.type
 
-interface VariableInstance {
-
-}
+class VariableInstance<T>(val value: T)
