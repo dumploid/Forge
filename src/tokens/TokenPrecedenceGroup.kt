@@ -24,6 +24,4 @@ class TokenPrecedenceGroup(private vararg val tokenPatternGroup: TokenPattern) :
 
         return output
     }
-
-
 }

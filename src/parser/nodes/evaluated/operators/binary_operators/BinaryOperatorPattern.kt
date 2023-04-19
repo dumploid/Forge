@@ -6,9 +6,9 @@ import tokens.patterns.operators.OperatorTokenPattern
 import utils.patterns.Pattern
 
 abstract class BinaryOperatorPattern(
-    val left: Pattern<*>,
+    private val left: Pattern<*>,
     operatorToken: OperatorTokenPattern,
-    val right: Pattern<*>
+    private val right: Pattern<*>
 ) : OperatorNodePattern(operatorToken) {
     override fun matches(checkedValue: Pattern<*>): Boolean {
         return TokenGroupingPattern(left, operatorToken, right).matches(checkedValue)
