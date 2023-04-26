@@ -1,15 +1,15 @@
 package parser.statements.statement_impl.declaration
 
-import environment.VariableSpace
 import environment.type.VariableInstance
+import interpreter
 import parser.statements.Statement
 import parser.statements.statement_patterns.declaration.StringTypeDeclarationPattern
 import tokens.TokenValue
 import tokens.patterns.values.immutable_values.StringTokenPattern
 
 class StringTypeDeclarationStatement(tokens: List<TokenValue>) : Statement(StringTypeDeclarationPattern, tokens) {
-    private val name = tokens[1].value;
-    private val evaluatedNode = tokens[3];
+    private val name = tokens[1].value
+    private val evaluatedNode = tokens[3]
 
     override fun run() {
         val x = when (evaluatedNode.type) {
@@ -17,6 +17,6 @@ class StringTypeDeclarationStatement(tokens: List<TokenValue>) : Statement(Strin
             else -> throw RuntimeException("Unable to evaluate node: $evaluatedNode")
         }
 
-        VariableSpace.currentBlock().insertValue(VariableInstance(x), name)
+        interpreter.variableSpace.currentBlock().insertValue(VariableInstance(x), name)
     }
 }

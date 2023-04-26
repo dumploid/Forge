@@ -11,9 +11,7 @@ class TokenGroupingPattern(vararg heldTokenPatterns: Pattern<*>) :
 
     override fun matches(checkedValue: Pattern<*>): Boolean {
         if (checkedValue !is TokenGroupingPattern) return false
-
         if (heldTokenPatterns.size != checkedValue.heldTokenPatterns.size) return false
-
         for (i in heldTokenPatterns.indices) {
             when (val currentTokenPattern = heldTokenPatterns[i]) {
                 is TokenPattern -> if (currentTokenPattern != checkedValue.heldTokenPatterns[i]) return false

@@ -4,3 +4,9 @@ Short y = 0xF;
 Long z = 0o123456;
 
 String str = "Hello!";
+
+if false {
+
+}
+
+Int h = 15;

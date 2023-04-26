@@ -2,11 +2,11 @@ package environment
 
 import java.util.LinkedList
 
-object VariableSpace {
-    private val blocks: LinkedList<BlockScope> = LinkedList()
+class VariableSpace {
+    val blocks: LinkedList<BlockScope> = LinkedList()
 
     init {
-        blocks.push(BlockScope()) //outer most scope
+        blocks.add(BlockScope()) //outer most scope
     }
 
     fun currentBlock(): BlockScope {

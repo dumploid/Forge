@@ -9,7 +9,8 @@ enum class Keyword(keywordString: String) : TokenPattern {
     INT_KEYWORD("Int"),
     LONG_KEYWORD("Long"),
     SHORT_KEYWORD("Short"),
-    STRING_KEYWORD("String");
+    STRING_KEYWORD("String"),
+    IF_KEYWORD("if");
 
     init {
         if (!keywordString.matches(Regex("[a-zA-Z_][a-zA-Z_0-9]*"))) {

@@ -6,10 +6,6 @@ import utils.patterns.ValueContainer
 
 abstract class Statement(heldPattern: StatementPattern, heldValue: List<TokenValue>) :
     ValueContainer<StatementPattern, List<TokenValue>>(heldPattern, heldValue) {
-    fun getPatternComponent(component: TokenValue): TokenValue {
-        println("|" + component)
-        return component
-    }
 
     abstract fun run()
 }
