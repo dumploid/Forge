@@ -15,5 +15,9 @@ if true {
     Int insideIf = 30;
 }
 
+Int testA = 15 + 5;
+Int testB = testA + 5;
+Int testC = testB - testA;
+
 Int h = 15 + 5;
 Int xTwo = 4;

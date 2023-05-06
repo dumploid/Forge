@@ -1,5 +1,6 @@
 package environment
 
+import environment.type.VariableInstance
 import java.util.LinkedList
 
 class VariableSpace {
@@ -11,5 +12,15 @@ class VariableSpace {
 
     fun currentBlock(): BlockScope {
         return blocks.last()
+    }
+
+    fun getVariable(variableName: String): VariableInstance<*> {
+        for (block in blocks) {
+            if (block.heldValues.containsKey(variableName)) {
+                return block.heldValues[variableName]!!
+            }
+        }
+
+        throw RuntimeException("Unable to retrieve variable of type name $variableName")
     }
 }

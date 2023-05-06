@@ -1,6 +1,8 @@
 package parser.nodes
 
+import interpreter
 import tokens.TokenValue
+import tokens.patterns.non_specific.ValidName
 import tokens.patterns.operators.binary_operators.MathOperatorPattern
 import tokens.patterns.values.immutable_values.StringTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.*
@@ -11,6 +13,8 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
 
     @Suppress("UNCHECKED_CAST")
     fun <T : Any> evaluate(clazz: KClass<T>): T = when (heldValue.type to clazz) {
+        ValidName to clazz -> interpreter.variableSpace.getVariable(heldValue.value).value as T
+
         StringTokenPattern to String::class -> heldValue.value as T
         CharacterTokenPattern to Char::class -> heldValue.value[0] as T
 
