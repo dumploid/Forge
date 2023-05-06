@@ -1,9 +1,7 @@
 package tokens.patterns.values.immutable_values
 
-import tokens.patterns.values.AbstractValueTokenPattern
+import tokens.patterns.TokenPattern
 
-object StringTokenPattern : AbstractValueTokenPattern<String>() {
+object StringTokenPattern : TokenPattern {
     override val matchedPattern = Regex("\".*?[^\\\\](\\\\\\\\)*\"")
-
-    override fun evaluate(from: String): String = from
 }

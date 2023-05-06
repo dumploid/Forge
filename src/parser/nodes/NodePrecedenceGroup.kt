@@ -1,31 +1,23 @@
 package parser.nodes
 
-import parser.nodes.evaluated.EvaluatedNodePattern
-import parser.structure.TokenGroupingPattern
-import utils.patterns.Pattern
 import utils.patterns.PrecedenceGroup
 
-class NodePrecedenceGroup(private vararg val tokenPatternGroup: EvaluatedNodePattern) :
-    PrecedenceGroup<Pattern<*>, EvaluatedNodePattern> {
-
-    fun containsMatchingNode(comparedTokenList: List<Pattern<*>>): Boolean {
-        tokenPatternGroup.forEach {
-            val currentPatternLength = it.getPatternLength()
-            for (i in 0..(comparedTokenList.size - currentPatternLength)) {
-                if (it.matches(
-                        TokenGroupingPattern(comparedTokenList.subList(i, i + currentPatternLength))
-                    )
-                ) return true
+class NodePrecedenceGroup(private vararg val nodePatterns: ASTNodePattern) :
+    PrecedenceGroup<List<ASTNode>, ASTNodePattern> {
+    override fun containsMatchingValue(comparedValue: List<ASTNode>): Boolean =
+        nodePatterns.any { currentASTNodePattern ->
+            val windowSize = currentASTNodePattern.matchedNodePattern.size
+            comparedValue.windowed(windowSize).any { y ->
+                currentASTNodePattern.matches(y)
             }
         }
 
-        return false
-    }
 
-    override fun containsMatchingValue(comparedValue: Pattern<*>): Boolean =
-        tokenPatternGroup.any { it.matches(comparedValue) }
-
-    override fun getMatchingValue(comparedValue: Pattern<*>): EvaluatedNodePattern =
-        tokenPatternGroup.find { it.matches(comparedValue) }!!
-
+    override fun getMatchingValue(comparedValue: List<ASTNode>): ASTNodePattern =
+        nodePatterns.find { currentASTNodePattern ->
+            val windowSize = currentASTNodePattern.matchedNodePattern.size
+            comparedValue.windowed(windowSize).any { y ->
+                currentASTNodePattern.matches(y)
+            }
+        }!!
 }

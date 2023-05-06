@@ -13,7 +13,7 @@ class TokenPrecedenceGroup(private vararg val tokenPatternGroup: TokenPattern) :
     override fun getMatchingValue(comparedValue: String): TokenPattern =
         tokenPatternGroup.find { it.matchedPattern.containsMatchIn(comparedValue) }!!
 
-    fun getTokenValues(comparedString: String): List<TokenValue> {
+    fun getCapturedTokenValues(comparedString: String): List<TokenValue> {
         val matchedTokenPattern: TokenPattern = getMatchingValue(comparedString)
 
         val output: MutableList<TokenValue> = ArrayList()

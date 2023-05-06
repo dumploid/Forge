@@ -1,16 +1,16 @@
 package parser.statements.statement_patterns
 
-import parser.nodes.evaluated.EvaluatedNodeType
-import parser.nodes.evaluated.EvaluatedNodeTypeWrapper
-import parser.structure.TokenGroupingPattern
-import parser.structure.TokenStructurePattern
+import parser.nodes.ASTNodePattern
+import parser.nodes.NodeType
 import tokens.patterns.Keyword
 import tokens.patterns.operators.UnfixedOperatorPattern
 
-object IfStatementPattern : StatementPattern() {
-    override val tokenPattern: TokenStructurePattern = TokenGroupingPattern(
-        Keyword.IF_KEYWORD,
-        EvaluatedNodeTypeWrapper(EvaluatedNodeType.BooleanType),
-        UnfixedOperatorPattern.OPENING_BRACE,
+object IfStatementPattern : StatementPattern(
+    ASTNodePattern(
+        listOf(
+            NodeType.RootSpecific(Keyword.IF_KEYWORD),
+            NodeType.NonSpecific,
+            NodeType.Specific(UnfixedOperatorPattern.OPENING_BRACE)
+        )
     )
-}
+)

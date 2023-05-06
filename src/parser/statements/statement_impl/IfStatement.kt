@@ -2,22 +2,16 @@ package parser.statements.statement_impl
 
 import environment.BlockScope
 import interpreter
+import parser.nodes.ASTNode
 import parser.statements.Statement
 import parser.statements.statement_patterns.IfStatementPattern
-import tokens.TokenValue
-import tokens.patterns.values.immutable_values.primitive_values.BooleanTokenPattern
 
-class IfStatement(tokens: List<TokenValue>): Statement(IfStatementPattern, tokens){
+class IfStatement(nodes: List<ASTNode>): Statement(IfStatementPattern, nodes){
 
-    private val evaluatedNode = tokens[1]
+    private val evaluatedNode = nodes[1]
 
     override fun run() {
-        val runIfStatement = when (evaluatedNode.type) {
-            is BooleanTokenPattern -> (evaluatedNode.type).evaluate(evaluatedNode.value)
-            else -> throw RuntimeException("Unable to evaluate node: $evaluatedNode")
-        }
-
-        if (runIfStatement) {
+        if (evaluatedNode.evaluate(Boolean::class)) {
             interpreter.variableSpace.blocks.add(BlockScope())
         } else {
             interpreter.jumpToClosingBrace()

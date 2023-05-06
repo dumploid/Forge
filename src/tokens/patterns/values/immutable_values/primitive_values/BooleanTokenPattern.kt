@@ -1,8 +1,7 @@
 package tokens.patterns.values.immutable_values.primitive_values
 
-import tokens.patterns.values.AbstractValueTokenPattern
+import tokens.patterns.TokenPattern
 
-object BooleanTokenPattern : AbstractValueTokenPattern<Boolean>() {
+object BooleanTokenPattern : TokenPattern {
     override val matchedPattern = Regex("true|false")
-    override fun evaluate(from: String): Boolean = from == "true"
 }

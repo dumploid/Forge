@@ -11,20 +11,20 @@ class Tokenizer(private val program: String) {
         it.containsMatchingValue(program)
     }!!
 
-    private fun getTokenValues(): List<TokenValue> = getContainingGroup().getTokenValues(program)
+    private fun getTokenValues(): List<TokenValue> = getContainingGroup().getCapturedTokenValues(program)
 
     private fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter { it.type != IgnoredTokenPattern }
 
     fun tokenize(): List<TokenValue> {
-        if (!hasTokens()) return listOf()
+        if (!hasTokens()) return emptyList()
 
         val capturedTokenValues = getTokenValues()
-        if (capturedTokenValues.isEmpty()) return listOf()
+        if (capturedTokenValues.isEmpty()) return emptyList()
 
         val output: MutableList<TokenValue> = ArrayList()
 
-        val matchedToken = getContainingGroup().getMatchingValue(program)
-        val splitProgram = program.split(matchedToken.matchedPattern)
+        val matchedTokenPattern = getContainingGroup().getMatchingValue(program)
+        val splitProgram = program.split(matchedTokenPattern.matchedPattern)
 
         //interweave the split programs tokens and the capturedTokenValues
         for (i in capturedTokenValues.indices) {

@@ -1,43 +1,36 @@
 package parser
 
-import parser.nodes.StatementContainerPattern
+import parser.nodes.ASTNode
 import parser.statements.Statement
 import parser.statements.StatementFactory
-import tokens.TokenValue
 import tokens.patterns.non_specific.StatementEndTokenPattern
 import tokens.patterns.operators.UnfixedOperatorPattern
 
-typealias TokenValueList = List<TokenValue>
-
 object Parser {
-    fun parseTokenList(inputTokens: TokenValueList): StatementContainerPattern =
-        StatementContainerPattern(parseStatements(inputTokens))
+    fun parseStatements(inputTokens: List<ASTNode>): List<Statement> = getUnparsedStatements(inputTokens).map { x ->
+        StatementFactory.createStatement(x)
+    }
 
-    private fun parseStatements(inputTokens: TokenValueList): List<Statement> =
-        getUnparsedStatements(inputTokens).map { x ->
-            StatementFactory.createStatement(x)
-        }
+    private fun isBracket(currentNode: ASTNode): Boolean =
+        currentNode.heldValue.type == UnfixedOperatorPattern.CLOSING_BRACE || currentNode.heldValue.type == UnfixedOperatorPattern.OPENING_BRACE
 
-    private fun isBracket(currentToken: TokenValue): Boolean =currentToken.type == UnfixedOperatorPattern.CLOSING_BRACE ||
-                currentToken.type == UnfixedOperatorPattern.OPENING_BRACE
+    private fun getUnparsedStatements(inputNodes: List<ASTNode>): List<List<ASTNode>> {
+        val output: MutableList<List<ASTNode>> = ArrayList()
 
-    private fun getUnparsedStatements(inputTokens: TokenValueList): List<TokenValueList> {
-        val output: MutableList<TokenValueList> = ArrayList()
+        var currentNodeValueList = mutableListOf<ASTNode>()
 
-        var currentTokenValueList: MutableList<TokenValue> = ArrayList()
-
-        for (currentToken: TokenValue in inputTokens) {
-            if (currentToken.type == StatementEndTokenPattern || isBracket(currentToken)) {
-                if (isBracket(currentToken)) {
-                    currentTokenValueList.add(currentToken)
+        for (currentNode: ASTNode in inputNodes) {
+            if (currentNode.heldValue.type == StatementEndTokenPattern || isBracket(currentNode)) {
+                if (isBracket(currentNode)) {
+                    currentNodeValueList.add(currentNode)
                 }
 
-                output.add(currentTokenValueList)
-                currentTokenValueList = ArrayList()
+                output.add(currentNodeValueList)
+                currentNodeValueList = mutableListOf()
                 continue
             }
 
-            currentTokenValueList.add(currentToken)
+            currentNodeValueList.add(currentNode)
         }
 
         return output

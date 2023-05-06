@@ -1,25 +1,32 @@
 package parser.statements
 
+import parser.nodes.ASTNode
 import parser.statements.statement_impl.ClosingBraceStatement
 import parser.statements.statement_impl.IfStatement
-import parser.statements.statement_impl.declaration.IntTypeDeclarationStatement
-import parser.statements.statement_impl.declaration.StringTypeDeclarationStatement
-import parser.statements.statement_patterns.ClosingBracePattern
-import parser.statements.statement_patterns.IfStatementPattern
-import parser.statements.statement_patterns.declaration.IntTypeDeclarationPattern
-import parser.statements.statement_patterns.declaration.StringTypeDeclarationPattern
-import tokens.TokenValue
+import parser.statements.statement_impl.declaration.*
+import parser.statements.statement_patterns.*
+import parser.statements.statement_patterns.declaration.*
 
 object StatementFactory {
-    fun createStatement(inputTokens: List<TokenValue>): Statement = when {
-        IntTypeDeclarationPattern.matches(inputTokens) -> IntTypeDeclarationStatement(inputTokens)
-        StringTypeDeclarationPattern.matches(inputTokens) -> StringTypeDeclarationStatement(inputTokens)
+    fun createStatement(inputNodes: List<ASTNode>): Statement = when {
+        ByteTypeDeclarationPattern.matches(inputNodes) -> ByteTypeDeclarationStatement(inputNodes)
+        ShortTypeDeclarationPattern.matches(inputNodes) -> ShortTypeDeclarationStatement(inputNodes)
+        IntTypeDeclarationPattern.matches(inputNodes) -> IntTypeDeclarationStatement(inputNodes)
+        LongTypeDeclarationPattern.matches(inputNodes) -> LongTypeDeclarationStatement(inputNodes)
 
-        IfStatementPattern.matches(inputTokens) -> IfStatement(inputTokens)
-        ClosingBracePattern.matches(inputTokens) -> ClosingBraceStatement(inputTokens)
+        FloatTypeDeclarationPattern.matches(inputNodes) -> FloatTypeDeclarationStatement(inputNodes)
+        DoubleTypeDeclarationPattern.matches(inputNodes) -> DoubleTypeDeclarationStatement(inputNodes)
 
-        else -> throw RuntimeException("Unable to create statement of order: " + inputTokens.map {
-            it.type
+        CharTypeDeclarationPattern.matches(inputNodes) -> CharTypeDeclarationStatement(inputNodes)
+        StringTypeDeclarationPattern.matches(inputNodes) -> StringTypeDeclarationStatement(inputNodes)
+
+        BooleanTypeDeclarationPattern.matches(inputNodes) -> BooleanTypeDeclaration(inputNodes)
+
+        IfStatementPattern.matches(inputNodes) -> IfStatement(inputNodes)
+        ClosingBracePattern.matches(inputNodes) -> ClosingBraceStatement(inputNodes)
+
+        else -> throw RuntimeException("Unable to create statement of order: " + inputNodes.map {
+            it.heldValue
         })
     }
 }

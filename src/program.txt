@@ -5,8 +5,15 @@ Long z = 0o123456;
 
 String str = "Hello!";
 
-if false {
+Boolean truth = true;
+Boolean lie = false;
 
+Double test = 0.0 - 4.0 + 5.0 + 6.0 - 7.0;
+Char c = 'a' + 'b';
+
+if true {
+    Int insideIf = 30;
 }
 
-Int h = 15;
+Int h = 15 + 5;
+Int xTwo = 4;
