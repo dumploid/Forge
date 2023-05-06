@@ -4,6 +4,7 @@ import tokens.patterns.Keyword
 import tokens.patterns.non_specific.IgnoredTokenPattern
 import tokens.patterns.non_specific.StatementEndTokenPattern
 import tokens.patterns.non_specific.ValidName
+import tokens.patterns.operators.UnaryOperators
 import tokens.patterns.operators.UnfixedOperatorPattern
 import tokens.patterns.operators.binary_operators.BitwiseOperators
 import tokens.patterns.operators.binary_operators.ComparisonOperatorPattern
@@ -30,6 +31,8 @@ val tokenList: List<TokenPrecedenceGroup> = listOf(
         ComparisonOperatorPattern.LESS_THAN_OR_EQUAL
     ),
     TokenPrecedenceGroup(LogicalOperatorPattern.LOGICAL_OR, LogicalOperatorPattern.LOGICAL_AND),
+
+    TokenPrecedenceGroup(UnaryOperators.UNARY_NOT, UnaryOperators.UNARY_BITWISE_NOT),
 
     TokenPrecedenceGroup(
         UnfixedOperatorPattern.OPENING_BRACE,

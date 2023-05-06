@@ -8,10 +8,10 @@ String str = "Hello!";
 Boolean truth = true;
 Boolean lie = false;
 
-Double test = 0.0 - 4.0 + 5.0 + 6.0 - 7.0;
+Double test = 0.0 - 4.0 * 5.0 + 6.0 - 7.0;
 Char c = 'a' + 'b';
 
-if true {
+if truth && lie {
     Int insideIf = 30;
 }
 
@@ -21,3 +21,7 @@ Int testC = testB - testA;
 
 Int h = 15 + 5;
 Int xTwo = 4;
+
+Int abcdef = 5 + 10 * 3;
+
+Boolean testBool = 50 == 30;
