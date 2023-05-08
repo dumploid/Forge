@@ -1,27 +1,49 @@
-Int x = 10;
-Byte value = 0b100;
-Short y = 0xF;
-Long z = 0o123456;
+Int decValue = 10;
+Int binaryValue = 0b100;
+Int hexValue = 0xF;
+Int octalValue = 0o123456;
 
 String str = "Hello!";
+
+Double math = 0.0 - 4.0 * 5.0 + 6.0 - 7.0;
+Char x = 'a' + 'b';
 
 Boolean truth = true;
 Boolean lie = false;
 
-Double test = 0.0 - 4.0 * 5.0 + 6.0 - 7.0;
-Char c = 'a' + 'b';
-
-if truth && lie {
+if truth || lie {
     Int insideIf = 30;
+    print insideIf + 4;
+    drop insideIf;
 }
 
 Int testA = 15 + 5;
 Int testB = testA + 5;
 Int testC = testB - testA;
+drop testA; drop testB;
 
-Int h = 15 + 5;
-Int xTwo = 4;
+Int PEMDAS = 5 + 10 * 3;
 
-Int abcdef = 5 + 10 * 3;
+Boolean testBoolA = 50 == 30;
+Double temporaryValue = 0.1;
+Boolean testBoolB = 50.1 == 50.0 + temporaryValue;
+Boolean testBoolC = 'a' == 'b';
 
-Boolean testBool = 50 == 30;
+Int reassigned = 15;
+reassigned = reassigned + 5;
+
+Int counter = 0;
+
+label:
+if counter < 10 {
+    print counter;
+    counter = counter + 1;
+
+    goto label;
+}
+
+push 10;
+pop outputValue;
+print outputValue + 5;
+
+end;

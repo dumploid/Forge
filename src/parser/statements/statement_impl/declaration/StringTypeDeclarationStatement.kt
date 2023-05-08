@@ -11,6 +11,6 @@ class StringTypeDeclarationStatement(nodes: List<ASTNode>) : Statement(StringTyp
     private val evaluatedNode = nodes[3]
 
     override fun run() {
-        interpreter.variableSpace.currentBlock().insertValue(VariableInstance(evaluatedNode.evaluate(String::class)), name)
+        interpreter.variableSpace.insertValue(VariableInstance(evaluatedNode.evaluate<String>()), name)
     }
 }

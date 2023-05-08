@@ -11,21 +11,19 @@ lateinit var interpreter: Interpreter
 fun main() {
     about()
 
-    println("Below is an example showing the statements of the input program and the variable environment")
-    val bufferedReader: BufferedReader = File("src/program.txt").bufferedReader()
+    val bufferedReader: BufferedReader = File("src/fib.txt").bufferedReader()
     val inputProgram = bufferedReader.use { it.readText() }
 
-    println("input program:")
-    println(inputProgram)
-
     val tokens = Tokenizer(inputProgram).tokenize()
-    val evaluatedNodes = TreeBuilder(tokens.map { ASTNode(it, emptyList()) } as MutableList<ASTNode>).buildTrees()
+    val evaluatedNodes =
+        TreeBuilder(tokens.map { ASTNode(it, emptyList()) } as MutableList<ASTNode>).buildTrees()
+
     val statements = Parser.parseStatements(evaluatedNodes)
     interpreter = Interpreter(statements)
     interpreter.execute()
 
     println("final variable state:")
-    println(interpreter.variableSpace.currentBlock().heldValues.map {x ->
+    println(interpreter.variableSpace.heldValues.map { x ->
         "(${x.key}, ${x.value.value})"
     })
 }

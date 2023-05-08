@@ -1,6 +1,7 @@
 package tokens
 
 import tokens.patterns.Keyword
+import tokens.patterns.non_specific.ColonTokenPattern
 import tokens.patterns.non_specific.IgnoredTokenPattern
 import tokens.patterns.non_specific.StatementEndTokenPattern
 import tokens.patterns.non_specific.ValidName
@@ -18,7 +19,8 @@ import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
 
 val tokenList: List<TokenPrecedenceGroup> = listOf(
     TokenPrecedenceGroup(StringTokenPattern, CharacterTokenPattern),
-    TokenPrecedenceGroup(DoubleTokenPattern, IntTokenPattern),
+    TokenPrecedenceGroup(DoubleTokenPattern),
+    TokenPrecedenceGroup(IntTokenPattern),
     TokenPrecedenceGroup(BooleanTokenPattern),
     TokenPrecedenceGroup(IgnoredTokenPattern),
 
@@ -47,5 +49,5 @@ val tokenList: List<TokenPrecedenceGroup> = listOf(
 
     TokenPrecedenceGroup(ComparisonOperatorPattern.GREATER_THAN, ComparisonOperatorPattern.LESS_THAN),
     TokenPrecedenceGroup(UnfixedOperatorPattern.ASSIGNMENT_OPERATOR),
-    TokenPrecedenceGroup(StatementEndTokenPattern)
+    TokenPrecedenceGroup(StatementEndTokenPattern, ColonTokenPattern)
 )

@@ -20,16 +20,8 @@ abstract class DeclarationPattern(
     )
 )
 
-object ByteTypeDeclarationPattern : DeclarationPattern(Keyword.BYTE_KEYWORD)
-object ShortTypeDeclarationPattern : DeclarationPattern(Keyword.SHORT_KEYWORD)
 object IntTypeDeclarationPattern : DeclarationPattern(Keyword.INT_KEYWORD)
-object LongTypeDeclarationPattern : DeclarationPattern(Keyword.LONG_KEYWORD)
-
-
-object FloatTypeDeclarationPattern : DeclarationPattern(Keyword.FLOAT_KEYWORD)
 object DoubleTypeDeclarationPattern : DeclarationPattern(Keyword.DOUBLE_KEYWORD)
-
 object BooleanTypeDeclarationPattern : DeclarationPattern(Keyword.BOOLEAN_KEYWORD)
-
 object CharTypeDeclarationPattern : DeclarationPattern(Keyword.CHAR_KEYWORD)
 object StringTypeDeclarationPattern : DeclarationPattern(Keyword.STRING_KEYWORD)

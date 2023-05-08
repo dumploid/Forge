@@ -1,0 +1,22 @@
+Int n = 0;
+
+label:
+if n < 100 {
+    n = n + 1;
+    if n % 15 == 0 {
+        print "fizzbuzz";
+        goto label;
+    }
+    if n % 3 == 0 {
+        print "fizz";
+        goto label;
+    }
+    if n % 5 == 0 {
+        print "fizz";
+        goto label;
+    }
+    print n;
+    goto label;
+}
+
+end;

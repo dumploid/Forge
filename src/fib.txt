@@ -1,0 +1,19 @@
+Int a = 0;
+Int b = 1;
+
+Int fibCount = 0;
+
+label:
+if fibCount < 9 {
+    fibCount = fibCount + 1;
+    print a;
+
+    Int temp = a + b;
+    a = b;
+    b = temp;
+
+    drop temp;
+    goto label;
+}
+
+end;

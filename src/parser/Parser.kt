@@ -3,6 +3,7 @@ package parser
 import parser.nodes.ASTNode
 import parser.statements.Statement
 import parser.statements.StatementFactory
+import tokens.patterns.non_specific.ColonTokenPattern
 import tokens.patterns.non_specific.StatementEndTokenPattern
 import tokens.patterns.operators.UnfixedOperatorPattern
 
@@ -20,8 +21,11 @@ object Parser {
         var currentNodeValueList = mutableListOf<ASTNode>()
 
         for (currentNode: ASTNode in inputNodes) {
-            if (currentNode.heldValue.type == StatementEndTokenPattern || isBracket(currentNode)) {
-                if (isBracket(currentNode)) {
+            if (currentNode.heldValue.type == StatementEndTokenPattern ||
+                currentNode.heldValue.type == ColonTokenPattern ||
+                isBracket(currentNode)
+            ) {
+                if (currentNode.heldValue.type != StatementEndTokenPattern) {
                     currentNodeValueList.add(currentNode)
                 }
 

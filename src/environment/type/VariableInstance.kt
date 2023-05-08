@@ -1,3 +1,3 @@
 package environment.type
 
-class VariableInstance<T>(val value: T)
+class VariableInstance(var value: Any)

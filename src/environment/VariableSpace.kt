@@ -1,26 +1,19 @@
 package environment
 
 import environment.type.VariableInstance
-import java.util.LinkedList
 
 class VariableSpace {
-    val blocks: LinkedList<BlockScope> = LinkedList()
+    val heldValues: HashMap<String, VariableInstance> = HashMap()
 
-    init {
-        blocks.add(BlockScope()) //outer most scope
-    }
-
-    fun currentBlock(): BlockScope {
-        return blocks.last()
-    }
-
-    fun getVariable(variableName: String): VariableInstance<*> {
-        for (block in blocks) {
-            if (block.heldValues.containsKey(variableName)) {
-                return block.heldValues[variableName]!!
-            }
+    fun getVariable(variableName: String): VariableInstance {
+        if (heldValues.containsKey(variableName)) {
+            return heldValues[variableName]!!
         }
 
-        throw RuntimeException("Unable to retrieve variable of type name $variableName")
+        throw RuntimeException("Unable to retrieve variable of name $variableName")
+    }
+
+    fun insertValue(instance: VariableInstance, instanceName: String) {
+        heldValues[instanceName] = instance
     }
 }

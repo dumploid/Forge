@@ -43,7 +43,19 @@ val evaluatedNodeList: List<NodePrecedenceGroup> = listOf(
     ),
     NodePrecedenceGroup(
         ASTNodePattern(
+            listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.LESS_THAN), NodeType.NonSpecific)
+        ),
+        ASTNodePattern(
+            listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.LESS_THAN_OR_EQUAL), NodeType.NonSpecific)
+        ),
+        ASTNodePattern(
+            listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.GREATER_THAN), NodeType.NonSpecific)
+        ),
+        ASTNodePattern(
+            listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.GREATER_THAN_OR_EQUAL), NodeType.NonSpecific)
+        ),
+        ASTNodePattern(
             listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.EQUALS), NodeType.NonSpecific)
-        )
+        ),
     )
 )

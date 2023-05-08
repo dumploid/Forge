@@ -11,7 +11,7 @@ class BooleanTypeDeclaration(nodes: List<ASTNode>) : Statement(BooleanTypeDeclar
     private val evaluatedNode = nodes[3]
 
     override fun run() {
-        interpreter.variableSpace.currentBlock()
-            .insertValue(VariableInstance(evaluatedNode.evaluate(Boolean::class)), name)
+        interpreter.variableSpace
+            .insertValue(VariableInstance(evaluatedNode.evaluate<Boolean>()), name)
     }
 }
