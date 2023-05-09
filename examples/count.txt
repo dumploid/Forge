@@ -1,6 +1,5 @@
 Int n = 0;
 
-
 label:
 if n < 10000 {
     Int n = n + 1;

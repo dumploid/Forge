@@ -6,11 +6,14 @@ import tokens.Tokenizer
 import java.io.BufferedReader
 import java.io.File
 import java.util.concurrent.TimeUnit
+import kotlin.system.exitProcess
 import kotlin.system.measureNanoTime
 
 lateinit var interpreter: Interpreter
 
 fun main(args : Array<String>) {
+    handleArgs(args)
+
     val bufferedReader: BufferedReader = File(args[0]).bufferedReader()
     val inputProgram = bufferedReader.use { it.readText() }
 
@@ -28,4 +31,21 @@ fun main(args : Array<String>) {
     println(interpreter.variableSpace.heldValues.map { x ->
         "(${x.key}, ${x.value.value})"
     })
+}
+
+fun handleArgs(args: Array<String>) {
+    if (args.isEmpty()) {
+        println("Provide an input file location")
+        println("Example: java -jar forge.jar examples\\count.txt")
+        exitProcess(0)
+    }
+    if (args.size > 1) {
+        println("Expected only one input file")
+        println("Example: java -jar forge.jar examples\\count.txt")
+        exitProcess(0)
+    }
+    if (!File(args[0]).exists()) {
+        println("File ${args[0]} does not exist, please provide a valid file.")
+        exitProcess(0)
+    }
 }
