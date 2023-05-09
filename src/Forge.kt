@@ -5,6 +5,7 @@ import parser.nodes.TreeBuilder
 import tokens.Tokenizer
 import java.io.BufferedReader
 import java.io.File
+import java.util.concurrent.TimeUnit
 import kotlin.system.measureNanoTime
 
 lateinit var interpreter: Interpreter
@@ -19,9 +20,9 @@ fun main(args : Array<String>) {
 
     val statements = Parser.parseStatements(evaluatedNodes)
     interpreter = Interpreter(statements)
-    println("Executed in " + measureNanoTime {
+    println("Executed in " + TimeUnit.MILLISECONDS.convert(measureNanoTime {
         interpreter.execute()
-    } + " ms")
+    }, TimeUnit.NANOSECONDS) + " ms")
 
     println("final variable state:")
     println(interpreter.variableSpace.heldValues.map { x ->

@@ -2,11 +2,10 @@ Int n = 0;
 
 
 label:
-if n < 100000000 {
+if n < 10000 {
     Int n = n + 1;
+    print n;
     goto label;
 }
-
-print n;
 
 end;
