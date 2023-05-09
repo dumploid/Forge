@@ -1,18 +1,13 @@
 package parser.nodes
 
 import interpreter
-import parser.ForgeEvaluationException
+import exceptions.ForgeEvaluationException
 import tokens.TokenValue
 import tokens.patterns.non_specific.ValidName
 import tokens.patterns.operators.UnaryOperators
-import tokens.patterns.operators.binary_operators.ComparisonOperatorPattern
-import tokens.patterns.operators.binary_operators.LogicalOperatorPattern
-import tokens.patterns.operators.binary_operators.MathOperatorPattern
+import tokens.patterns.operators.binary_operators.*
 import tokens.patterns.values.immutable_values.StringTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.BooleanTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.CharacterTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.*
 import kotlin.reflect.KClass
 
 data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
@@ -47,8 +42,7 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
 
             StringTokenPattern -> {
                 val quotedString = heldValue.value
-                (if (quotedString.length == 2) ""
-                else quotedString.substring(1 until quotedString.length - 1)) as T
+                quotedString.substring(1 until quotedString.length - 1) as T
             }
 
             CharacterTokenPattern -> heldValue.value[1] as T //Need to make this work for escape chars

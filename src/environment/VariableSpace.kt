@@ -1,6 +1,7 @@
 package environment
 
 import environment.type.VariableInstance
+import exceptions.ForgeException
 import java.lang.NullPointerException
 
 class VariableSpace {
@@ -10,7 +11,7 @@ class VariableSpace {
         try {
             return heldValues[variableName]!!
         } catch (e: NullPointerException) {
-            throw RuntimeException("Unable to retrieve variable of name $variableName")
+            throw ForgeException("Unable to retrieve variable of name $variableName")
         }
     }
 

@@ -26,11 +26,6 @@ fun main(args : Array<String>) {
     println("Executed in " + TimeUnit.MILLISECONDS.convert(measureNanoTime {
         interpreter.execute()
     }, TimeUnit.NANOSECONDS) + " ms")
-
-    println("final variable state:")
-    println(interpreter.variableSpace.heldValues.map { x ->
-        "(${x.key}, ${x.value.value})"
-    })
 }
 
 fun handleArgs(args: Array<String>) {

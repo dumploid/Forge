@@ -1,26 +1,32 @@
 package environment
 
-import parser.ForgeEvaluationException
+import exceptions.ForgeException
 import parser.statements.Statement
 import parser.statements.statement_impl.ClosingBraceStatement
 import parser.statements.statement_impl.EndStatement
 import parser.statements.statement_impl.IfStatement
 import parser.statements.statement_impl.LabelStatement
+import kotlin.system.exitProcess
 
 class Interpreter(val statements: List<Statement>) {
     private var pointer = 0
     val variableSpace = VariableSpace()
-    val stack = mutableListOf<Any>()
+    val stack = ArrayDeque<Any>()
 
     fun execute() {
         while (pointer < statements.size) {
             val statement = statements[pointer]
             pointer += 1
+
             try {
                 statement.run()
-            } catch (e: ForgeEvaluationException) {
-                println("Failure to evaluate: " + e.message)
+            } catch (e: ForgeException) {
+                println("Error running code:")
+                println(e.message)
+                println("at: ${statement.heldValue.map{it.heldValue.value}}")
+                exitProcess(0)
             }
+
             if (statement is EndStatement) {
                 return
             }

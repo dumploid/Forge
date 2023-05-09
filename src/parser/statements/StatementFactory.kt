@@ -34,7 +34,7 @@ object StatementFactory {
         EndStatementPattern.matches(inputNodes) -> EndStatement(inputNodes)
 
         else -> throw RuntimeException("Unable to create statement of order: " + inputNodes.map {
-            it.heldValue
+            it.heldValue.value
         })
     }
 }

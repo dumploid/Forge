@@ -46,4 +46,8 @@ push 10;
 pop outputValue;
 print outputValue + 5;
 
+print outputValue;
+
+print "h" + "" + "h0" + "";
+
 end;
