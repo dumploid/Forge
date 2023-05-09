@@ -14,7 +14,6 @@ import tokens.patterns.values.immutable_values.primitive_values.CharacterTokenPa
 import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
 import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
 import kotlin.reflect.KClass
-import kotlin.reflect.full.isSubclassOf
 
 data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
 
@@ -82,11 +81,11 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
 
                 val nodeType = getNodeType()
 
-                when {
-                    nodeType.isSubclassOf(String::class) -> left as String + right as String
-                    nodeType.isSubclassOf(Char::class) -> left as Char + (right as Char).code
-                    nodeType.isSubclassOf(Int::class) -> left as Int + right as Int
-                    nodeType.isSubclassOf(Double::class) -> left as Double + right as Double
+                when (nodeType) {
+                    String::class -> left as String + right as String
+                    Char::class -> left as Char + (right as Char).code
+                    Int::class -> left as Int + right as Int
+                    Double::class -> left as Double + right as Double
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} + ${nodeType.simpleName!!}")
                 } as T
             }
@@ -96,9 +95,9 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
                 val right = children[1].evaluate<T>()
 
                 val nodeType = getNodeType()
-                when {
-                    nodeType.isSubclassOf(Int::class) -> left as Int - right as Int
-                    nodeType.isSubclassOf(Double::class) -> left as Double - right as Double
+                when (nodeType) {
+                    Int::class -> left as Int - right as Int
+                    Double::class -> left as Double - right as Double
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} - ${nodeType.simpleName!!}")
                 } as T
             }
@@ -108,9 +107,9 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
                 val right = children[1].evaluate<T>()
 
                 val nodeType = getNodeType()
-                when {
-                    nodeType.isSubclassOf(Int::class) -> left as Int % right as Int
-                    nodeType.isSubclassOf(Double::class) -> left as Double % right as Double
+                when (nodeType) {
+                    Int::class -> left as Int % right as Int
+                    Double::class -> left as Double % right as Double
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} % ${nodeType.simpleName!!}")
                 } as T
             }
@@ -120,9 +119,9 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
                 val right = children[1].evaluate<T>()
 
                 val nodeType = getNodeType()
-                when {
-                    nodeType.isSubclassOf(Int::class) -> left as Int * right as Int
-                    nodeType.isSubclassOf(Double::class) -> left as Double * right as Double
+                when (nodeType) {
+                    Int::class -> left as Int * right as Int
+                    Double::class -> left as Double * right as Double
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} * ${nodeType.simpleName!!}")
                 } as T
             }
@@ -132,9 +131,9 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
                 val right = children[1].evaluate<T>()
 
                 val nodeType = getNodeType()
-                when {
-                    nodeType.isSubclassOf(Int::class) -> left as Int / right as Int
-                    nodeType.isSubclassOf(Double::class) -> left as Double / right as Double
+                when (nodeType) {
+                    Int::class -> left as Int / right as Int
+                    Double::class -> left as Double / right as Double
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} / ${nodeType.simpleName!!}")
                 } as T
             }
@@ -179,9 +178,9 @@ data class ASTNode(val heldValue: TokenValue, val children: List<ASTNode>) {
                 val right = children[1].evaluate<Any>()
 
                 val nodeType = children[0].getNodeType()
-                when {
-                    nodeType.isSubclassOf(Int::class) -> (left as Int) < (right as Int)
-                    nodeType.isSubclassOf(Double::class) -> (left as Double) < (right as Double)
+                when (nodeType) {
+                    Int::class -> (left as Int) < (right as Int)
+                    Double::class -> (left as Double) < (right as Double)
                     else -> throw ForgeEvaluationException("$this",  "${nodeType.simpleName!!} ${heldValue.value} ${nodeType.simpleName!!}")
                 } as T
             }

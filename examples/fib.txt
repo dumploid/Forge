@@ -4,7 +4,7 @@ Int b = 1;
 Int fibCount = 0;
 
 label:
-if fibCount < 9 {
+if fibCount < 30 {
     fibCount = fibCount + 1;
     print a;
 

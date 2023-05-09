@@ -47,7 +47,4 @@ class Interpreter(val statements: List<Statement>) {
     fun goToLabel(labelName: String) {
         pointer = statements.indexOfFirst { it is LabelStatement && it.name.heldValue.value == labelName }
     }
-
-
-
 }

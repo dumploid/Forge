@@ -5,13 +5,12 @@ import parser.nodes.TreeBuilder
 import tokens.Tokenizer
 import java.io.BufferedReader
 import java.io.File
+import kotlin.system.measureNanoTime
 
 lateinit var interpreter: Interpreter
 
-fun main() {
-    about()
-
-    val bufferedReader: BufferedReader = File("src/fib.txt").bufferedReader()
+fun main(args : Array<String>) {
+    val bufferedReader: BufferedReader = File(args[0]).bufferedReader()
     val inputProgram = bufferedReader.use { it.readText() }
 
     val tokens = Tokenizer(inputProgram).tokenize()
@@ -20,23 +19,12 @@ fun main() {
 
     val statements = Parser.parseStatements(evaluatedNodes)
     interpreter = Interpreter(statements)
-    interpreter.execute()
+    println("Executed in " + measureNanoTime {
+        interpreter.execute()
+    } + " ms")
 
     println("final variable state:")
     println(interpreter.variableSpace.heldValues.map { x ->
         "(${x.key}, ${x.value.value})"
     })
-}
-
-fun about() {
-    println(
-        """The forge language is a bare bones language.
-
-The base language will contain minimal features, those being:
- - Ability to declare primitives
- - If statements
- - GoTo statements
- - Labels
- """
-    )
 }

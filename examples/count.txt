@@ -1,0 +1,12 @@
+Int n = 0;
+
+
+label:
+if n < 100000000 {
+    Int n = n + 1;
+    goto label;
+}
+
+print n;
+
+end;

@@ -4,15 +4,15 @@ label:
 if n < 100 {
     n = n + 1;
     if n % 15 == 0 {
-        print "fizzbuzz";
+        print "FizzBuzz";
         goto label;
     }
     if n % 3 == 0 {
-        print "fizz";
+        print "Fizz";
         goto label;
     }
     if n % 5 == 0 {
-        print "fizz";
+        print "Buzz";
         goto label;
     }
     print n;
