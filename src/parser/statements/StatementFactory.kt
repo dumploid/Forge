@@ -4,7 +4,6 @@ import parser.nodes.ASTNode
 import parser.statements.statement_impl.*
 import parser.statements.statement_impl.declaration.*
 import parser.statements.statement_patterns.*
-import parser.statements.statement_patterns.declaration.*
 
 object StatementFactory {
     fun createStatement(inputNodes: List<ASTNode>): Statement = when {
@@ -34,7 +33,7 @@ object StatementFactory {
         EndStatementPattern.matches(inputNodes) -> EndStatement(inputNodes)
 
         else -> throw RuntimeException("Unable to create statement of order: " + inputNodes.map {
-            it.heldValue.value
+            it.heldValue
         })
     }
 }

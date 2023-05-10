@@ -1,21 +1,10 @@
 package tokens
 
-import tokens.patterns.Keyword
-import tokens.patterns.non_specific.ColonTokenPattern
-import tokens.patterns.non_specific.IgnoredTokenPattern
-import tokens.patterns.non_specific.StatementEndTokenPattern
-import tokens.patterns.non_specific.ValidName
-import tokens.patterns.operators.UnaryOperators
-import tokens.patterns.operators.UnfixedOperatorPattern
-import tokens.patterns.operators.binary_operators.BitwiseOperators
-import tokens.patterns.operators.binary_operators.ComparisonOperatorPattern
-import tokens.patterns.operators.binary_operators.LogicalOperatorPattern
-import tokens.patterns.operators.binary_operators.MathOperatorPattern
+import tokens.patterns.non_specific.*
+import tokens.patterns.operators.*
+import tokens.patterns.operators.binary_operators.*
 import tokens.patterns.values.immutable_values.StringTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.BooleanTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.CharacterTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.DoubleTokenPattern
-import tokens.patterns.values.immutable_values.primitive_values.IntTokenPattern
+import tokens.patterns.values.immutable_values.primitive_values.*
 
 val tokenList: List<TokenPrecedenceGroup> = listOf(
     TokenPrecedenceGroup(StringTokenPattern, CharacterTokenPattern),
@@ -24,8 +13,7 @@ val tokenList: List<TokenPrecedenceGroup> = listOf(
     TokenPrecedenceGroup(DoubleTokenPattern),
     TokenPrecedenceGroup(IntTokenPattern),
 
-    TokenPrecedenceGroup(*Keyword.values()),
-    TokenPrecedenceGroup(ValidName),
+    TokenPrecedenceGroup(ValidName), // Also handles keywords later in the clean tokens stage
 
     TokenPrecedenceGroup(
         ComparisonOperatorPattern.EQUALS,

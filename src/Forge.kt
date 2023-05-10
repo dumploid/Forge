@@ -1,7 +1,9 @@
 import environment.Interpreter
 import parser.Parser
 import parser.nodes.ASTNode
+import parser.nodes.ASTNodeValue
 import parser.nodes.TreeBuilder
+import parser.nodes.cleanNode
 import tokens.Tokenizer
 import java.io.BufferedReader
 import java.io.File
@@ -18,10 +20,12 @@ fun main(args : Array<String>) {
     val inputProgram = bufferedReader.use { it.readText() }
 
     val tokens = Tokenizer(inputProgram).tokenize()
-    val evaluatedNodes =
-        TreeBuilder(tokens.map { ASTNode(it, emptyList()) } as MutableList<ASTNode>).buildTrees()
+
+    val nodes = tokens.map { cleanNode(ASTNode(ASTNodeValue.EvaluatedValue(it), emptyList())) }
+    val evaluatedNodes = TreeBuilder(nodes).buildTrees()
 
     val statements = Parser.parseStatements(evaluatedNodes)
+
     interpreter = Interpreter(statements)
     println("Executed in " + TimeUnit.MILLISECONDS.convert(measureNanoTime {
         interpreter.execute()

@@ -1,8 +1,7 @@
-package parser.statements.statement_patterns.declaration
+package parser.statements.statement_patterns
 
 import parser.nodes.ASTNodePattern
 import parser.nodes.NodeType
-import parser.statements.statement_patterns.StatementPattern
 import tokens.patterns.Keyword
 import tokens.patterns.non_specific.ValidName
 import tokens.patterns.operators.UnfixedOperatorPattern

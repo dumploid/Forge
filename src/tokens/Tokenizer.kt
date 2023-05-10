@@ -1,6 +1,8 @@
 package tokens
 
+import tokens.patterns.Keyword
 import tokens.patterns.non_specific.IgnoredTokenPattern
+import tokens.patterns.non_specific.ValidName
 
 class Tokenizer(private val program: String) {
     private fun hasTokens(): Boolean = tokenList.any {
@@ -13,7 +15,18 @@ class Tokenizer(private val program: String) {
 
     private fun getTokenValues(): List<TokenValue> = getContainingGroup().getCapturedTokenValues(program)
 
-    private fun cleanTokens(input: List<TokenValue>): List<TokenValue> = input.filter { it.type != IgnoredTokenPattern }
+    private fun cleanTokens(input: List<TokenValue>): List<TokenValue> {
+        val cleanedTokens = input.filter { it.type != IgnoredTokenPattern }
+
+        return cleanedTokens.map { tokenValue ->
+            if (tokenValue.type is ValidName) {
+                val keywordIndex = Keyword.values().indexOfFirst { keyword -> keyword.matches(tokenValue.value) }
+                if (keywordIndex != -1) TokenValue(Keyword.values()[keywordIndex], tokenValue.value) else tokenValue
+            } else {
+                tokenValue
+            }
+        }
+    }
 
     fun tokenize(): List<TokenValue> {
         if (!hasTokens()) return emptyList()

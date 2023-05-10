@@ -1,6 +1,7 @@
 package environment
 
 import exceptions.ForgeException
+import parser.nodes.ASTNodeValue
 import parser.statements.Statement
 import parser.statements.statement_impl.ClosingBraceStatement
 import parser.statements.statement_impl.EndStatement
@@ -23,7 +24,7 @@ class Interpreter(val statements: List<Statement>) {
             } catch (e: ForgeException) {
                 println("Error running code:")
                 println(e.message)
-                println("at: ${statement.heldValue.map{it.heldValue.value}}")
+                println("at: ${statement.heldValue.map { it.heldValue }}")
                 exitProcess(0)
             }
 
@@ -37,20 +38,17 @@ class Interpreter(val statements: List<Statement>) {
 
     fun jumpToClosingBrace() {
         var braceCounter = 1
-        while(braceCounter != 0) {
+        while (braceCounter != 0) {
             when (statements[pointer]) {
-                is IfStatement -> {
-                    braceCounter+=1
-                }
-                is ClosingBraceStatement -> {
-                    braceCounter-=1
-                }
+                is IfStatement -> braceCounter += 1
+                is ClosingBraceStatement -> braceCounter -= 1
             }
             pointer += 1
         }
     }
 
     fun goToLabel(labelName: String) {
-        pointer = statements.indexOfFirst { it is LabelStatement && it.name.heldValue.value == labelName }
+        pointer =
+            statements.indexOfFirst { it is LabelStatement && (it.name.heldValue as ASTNodeValue.EvaluatedValue).evaluatedValue.value == labelName }
     }
 }

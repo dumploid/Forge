@@ -1,8 +1,10 @@
 package parser
 
 import parser.nodes.ASTNode
+import parser.nodes.ASTNodeValue
 import parser.statements.Statement
 import parser.statements.StatementFactory
+import tokens.patterns.TokenPattern
 import tokens.patterns.non_specific.ColonTokenPattern
 import tokens.patterns.non_specific.StatementEndTokenPattern
 import tokens.patterns.operators.UnfixedOperatorPattern
@@ -12,8 +14,8 @@ object Parser {
         StatementFactory.createStatement(x)
     }
 
-    private fun isBracket(currentNode: ASTNode): Boolean =
-        currentNode.heldValue.type == UnfixedOperatorPattern.CLOSING_BRACE || currentNode.heldValue.type == UnfixedOperatorPattern.OPENING_BRACE
+    private fun isBracket(currentNode: TokenPattern): Boolean =
+        currentNode == UnfixedOperatorPattern.CLOSING_BRACE || currentNode == UnfixedOperatorPattern.OPENING_BRACE
 
     private fun getUnparsedStatements(inputNodes: List<ASTNode>): List<List<ASTNode>> {
         val output: MutableList<List<ASTNode>> = ArrayList()
@@ -21,20 +23,25 @@ object Parser {
         var currentNodeValueList = mutableListOf<ASTNode>()
 
         for (currentNode: ASTNode in inputNodes) {
-            if (currentNode.heldValue.type == StatementEndTokenPattern ||
-                currentNode.heldValue.type == ColonTokenPattern ||
-                isBracket(currentNode)
-            ) {
-                if (currentNode.heldValue.type != StatementEndTokenPattern) {
-                    currentNodeValueList.add(currentNode)
+            if (currentNode.heldValue !is ASTNodeValue.EvaluatedValue) {
+                currentNodeValueList.add(currentNode)
+            } else {
+                val type = currentNode.heldValue.evaluatedValue.type
+                if (type == StatementEndTokenPattern ||
+                    type == ColonTokenPattern ||
+                    isBracket(type)
+                ) {
+                    if (type != StatementEndTokenPattern) {
+                        currentNodeValueList.add(currentNode)
+                    }
+
+                    output.add(currentNodeValueList)
+                    currentNodeValueList = mutableListOf()
+                    continue
                 }
 
-                output.add(currentNodeValueList)
-                currentNodeValueList = mutableListOf()
-                continue
+                currentNodeValueList.add(currentNode)
             }
-
-            currentNodeValueList.add(currentNode)
         }
 
         return output
