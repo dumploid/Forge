@@ -12,6 +12,8 @@ enum class Keyword(keywordString: String) : TokenPattern {
     DROP_KEYWORD("drop"),
     PUSH_KEYWORD("push"),
     POP_KEYWORD("pop"),
+    PICK_KEYWORD("pick"),
+    PUT_KEYWORD("put"),
     END_KEYWORD("end");
 
     init {

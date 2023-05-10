@@ -70,20 +70,6 @@ fun cleanNode(inputNode: ASTNode): ASTNode {
             is CharacterTokenPattern -> ASTNodeValue.CharValue(nodeValue.value[1])
             is BooleanTokenPattern -> ASTNodeValue.BooleanValue(nodeValue.value == "true")
 
-//            is CommaTokenPattern -> {
-//                val output = mutableListOf<ASTNodeValue>()
-//
-//                for (side in listOf(inputNode.children[0], inputNode.children[1])) {
-//                    if ((side.heldValue as ASTNodeValue.EvaluatedValue).evaluatedValue.type is CommaTokenPattern) {
-//                        output.addAll((cleanNode(side).heldValue as ASTNodeValue.ArrayValue).arrayValue)
-//                    } else {
-//                        output.add(cleanNode(side).heldValue)
-//                    }
-//                }
-//
-//                ASTNodeValue.ArrayValue(output.toTypedArray())
-//            }
-
             else -> {
                 inputNode.heldValue
             }

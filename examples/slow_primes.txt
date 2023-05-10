@@ -1,7 +1,7 @@
 Int n = 2;
 
 label_a:
-if n < 10000 {
+if n < 100000 {
     Int i = 2;
 
     label_b:

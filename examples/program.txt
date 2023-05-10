@@ -51,6 +51,22 @@ print poppedValue + 5;
 
 print poppedValue;
 
+push 5;
+push 10;
+push 15;
+push 20;
+push 25;
+push 30;
+
+pick pickedValue 2;
+print "Picked Value:";
+print pickedValue;
+
+put 300 2;
+pick pickedValue 2;
+print "Value put on stack:";
+print pickedValue;
+
 print "h" + "" + "h0" + "";
 
 end;
