@@ -12,15 +12,10 @@ class ASTNode(val heldValue: ASTNodeValue, val children: List<ASTNode>) {
     fun <T : Any> evaluate(): T {
         return when (heldValue) {
             is ASTNodeValue.StringValue -> heldValue.stringValue as T
-
             is ASTNodeValue.CharValue -> heldValue.charValue as T
-
             is ASTNodeValue.BooleanValue -> heldValue.booleanValue as T
-
             is ASTNodeValue.IntegerValue -> heldValue.integerValue as T
-
             is ASTNodeValue.DoubleValue -> heldValue.doubleValue as T
-
             is ASTNodeValue.EvaluatedValue -> when (heldValue.evaluatedValue.type) {
                 ValidName -> interpreter.variableSpace.getVariable(heldValue.evaluatedValue.value).value as T
 
