@@ -1,7 +1,8 @@
-Int n = 2;
+print 2;
+Int n = 3;
 
 label_a:
-if n < 10000 {
+if n < 100000 {
     Int i = 2;
 
     label_b:
@@ -16,7 +17,7 @@ if n < 10000 {
     label_c:
     drop i;
 
-    n = n + 1;
+    n = n + 2;
     goto label_a;
 }
 

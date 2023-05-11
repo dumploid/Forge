@@ -1,0 +1,42 @@
+Int max = 10000000;
+
+Int pushedValue = max;
+
+pushLabel:
+if pushedValue >= 2 {
+    push pushedValue;
+    pushedValue = pushedValue - 1;
+    goto pushLabel;
+}
+drop pushedValue;
+
+Int stackSize = max - 1;
+Int stackIndex = 0;
+
+loop:
+if stackIndex < stackSize {
+    pick pickedPrime stackIndex;
+    if pickedPrime > 0 {
+        print pickedPrime;
+        goto removeMultiples;
+        removeMultiplesEnd:
+    }
+
+    stackIndex = 1 + stackIndex;
+    goto loop;
+}
+
+end;
+
+removeMultiples:
+Int putIndex = stackIndex;
+
+filter:
+putIndex = putIndex + pickedPrime;
+if putIndex < stackSize {
+    put 0 putIndex;
+    goto filter;
+}
+drop putIndex;
+
+goto removeMultiplesEnd;
