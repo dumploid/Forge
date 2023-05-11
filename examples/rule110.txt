@@ -1,0 +1,58 @@
+Int maxLayers = 100;
+Int currentLayer = 0;
+
+push false;
+push true;
+
+layer:
+push false;
+if maxLayers > currentLayer {
+    currentLayer = currentLayer + 1;
+
+    Int leftStringLength = maxLayers - currentLayer;
+    Int leftStringCounter = 1;
+    String currentString = "";
+
+    string:
+    if leftStringLength >= leftStringCounter {
+        leftStringCounter = leftStringCounter + 1;
+        currentString = currentString + " ";
+        goto string;
+    }
+
+    Int pointer = 1;
+    Boolean offsetTwo = false; Boolean offsetOne = false;
+    pointer:
+    if pointer < currentLayer + 1 {
+        pick left pointer - 1;
+        pick middle pointer;
+        pick right pointer + 1;
+
+        Boolean output = true;
+        if left && middle && right {output = false;}
+        if left && !middle && !right {output = false;}
+        if !left && !middle && !right {output = false;}
+
+        if output {currentString = currentString + "█";}
+        if !output {currentString = currentString + " ";}
+
+        if pointer > 1 {
+            put offsetTwo pointer - 2;
+        }
+        offsetTwo = offsetOne;
+        offsetOne = output;
+
+        pointer = pointer + 1;
+        goto pointer;
+    }
+
+    if pointer > 1 {
+        put offsetTwo pointer - 2;
+    }
+    put offsetOne pointer - 1;
+
+    print currentString;
+    goto layer;
+}
+
+end;

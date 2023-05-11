@@ -134,10 +134,7 @@ class ASTNode(val heldValue: ASTNodeValue, val children: List<ASTNode>) {
                     (left == right) as T
                 }
 
-                ComparisonOperatorPattern.LESS_THAN,
-                ComparisonOperatorPattern.LESS_THAN_OR_EQUAL,
-                ComparisonOperatorPattern.GREATER_THAN,
-                ComparisonOperatorPattern.GREATER_THAN_OR_EQUAL -> {
+                ComparisonOperatorPattern.LESS_THAN -> {
                     val left = children[0].evaluate<Any>()
                     val right = children[1].evaluate<Any>()
 
@@ -145,6 +142,48 @@ class ASTNode(val heldValue: ASTNodeValue, val children: List<ASTNode>) {
                     when (nodeType) {
                         Int::class -> (left as Int) < (right as Int)
                         Double::class -> (left as Double) < (right as Double)
+                        else -> throw ForgeEvaluationException(
+                            "$this",
+                            "${nodeType.simpleName!!} $heldValue ${nodeType.simpleName!!}"
+                        )
+                    } as T
+                }
+                ComparisonOperatorPattern.LESS_THAN_OR_EQUAL -> {
+                    val left = children[0].evaluate<Any>()
+                    val right = children[1].evaluate<Any>()
+
+                    val nodeType = children[0].getNodeType()
+                    when (nodeType) {
+                        Int::class -> (left as Int) <= (right as Int)
+                        Double::class -> (left as Double) <= (right as Double)
+                        else -> throw ForgeEvaluationException(
+                            "$this",
+                            "${nodeType.simpleName!!} $heldValue ${nodeType.simpleName!!}"
+                        )
+                    } as T
+                }
+                ComparisonOperatorPattern.GREATER_THAN -> {
+                    val left = children[0].evaluate<Any>()
+                    val right = children[1].evaluate<Any>()
+
+                    val nodeType = children[0].getNodeType()
+                    when (nodeType) {
+                        Int::class -> (left as Int) > (right as Int)
+                        Double::class -> (left as Double) > (right as Double)
+                        else -> throw ForgeEvaluationException(
+                            "$this",
+                            "${nodeType.simpleName!!} $heldValue ${nodeType.simpleName!!}"
+                        )
+                    } as T
+                }
+                ComparisonOperatorPattern.GREATER_THAN_OR_EQUAL -> {
+                    val left = children[0].evaluate<Any>()
+                    val right = children[1].evaluate<Any>()
+
+                    val nodeType = children[0].getNodeType()
+                    when (nodeType) {
+                        Int::class -> (left as Int) >= (right as Int)
+                        Double::class -> (left as Double) >= (right as Double)
                         else -> throw ForgeEvaluationException(
                             "$this",
                             "${nodeType.simpleName!!} $heldValue ${nodeType.simpleName!!}"

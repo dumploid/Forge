@@ -1,5 +1,6 @@
 package parser.nodes
 
+import tokens.patterns.operators.UnaryOperators
 import tokens.patterns.operators.binary_operators.ComparisonOperatorPattern
 import tokens.patterns.operators.binary_operators.LogicalOperatorPattern
 import tokens.patterns.operators.binary_operators.MathOperatorPattern
@@ -26,6 +27,14 @@ val evaluatedNodeList: List<NodePrecedenceGroup> = listOf(
     ),
     NodePrecedenceGroup(
         ASTNodePattern(
+            listOf(NodeType.RootSpecific(UnaryOperators.UNARY_NOT), NodeType.NonSpecific)
+        ),
+        ASTNodePattern(
+            listOf(NodeType.RootSpecific(UnaryOperators.UNARY_BITWISE_NOT), NodeType.NonSpecific)
+        )
+    ),
+    NodePrecedenceGroup(
+        ASTNodePattern(
             listOf(NodeType.NonSpecific, NodeType.RootSpecific(LogicalOperatorPattern.LOGICAL_OR), NodeType.NonSpecific)
         ),
         ASTNodePattern(
@@ -48,5 +57,5 @@ val evaluatedNodeList: List<NodePrecedenceGroup> = listOf(
         ASTNodePattern(
             listOf(NodeType.NonSpecific, NodeType.RootSpecific(ComparisonOperatorPattern.EQUALS), NodeType.NonSpecific)
         ),
-    )
+    ),
 )
