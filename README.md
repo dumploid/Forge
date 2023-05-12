@@ -7,3 +7,4 @@ The base language will contain minimal features, those being:
  - If statements
  - GoTo statements
  - Labels
+ - A Global stack
