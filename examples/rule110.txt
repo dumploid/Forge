@@ -1,4 +1,4 @@
-Int maxLayers = 1000;
+Int maxLayers = 100;
 Int currentLayer = 0;
 
 push false;
